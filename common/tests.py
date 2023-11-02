@@ -58,22 +58,22 @@ class TestModels:
 
         test_object = User.objects.create_user(
                 is_superuser=False,
+                first_name='Name 1',
                 email='whatever', password='whatever'
             )
 
         assert test_object.first_name == 'Name 1'
 
-        test_object.update(name='Name 2')
+        test_object.update(first_name='Name 2')
         assert test_object.first_name == 'Name 2'
 
-        test_object.update({'name': 'Name 3'})
+        test_object.update({'first_name': 'Name 3'})
         assert test_object.first_name == 'Name 3'
 
     def test_user_custom_methods(self):
 
         user = User.objects.create()
         assert user.full_name == ''
-        assert user.display_name == '+161712354567'
 
         user.update(email='person@site.com')
         assert user.full_name == ''

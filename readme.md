@@ -4,7 +4,7 @@ This is a personal boilerplate for Django 4.2 projects hosted on Platform.sh wit
 ## Set up and run App Instance
 Clone repo. Run the following commands to configure the project:
 ```
-pipenv install
+pipenv install -d
 pipenv shell
 python manage.py migrate
 python manage.py runserver
