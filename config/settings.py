@@ -130,7 +130,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'django_celery_results',
     # Our apps
-    # ...
+    'common',
 ]
 
 MIDDLEWARE = [
@@ -141,7 +141,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'conversation.middleware.SMSMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -243,9 +242,6 @@ LOGGING = {
 }
 
 CSRF_TRUSTED_ORIGINS = []
-
-ADMIN_EMAIL = env('ADMIN_EMAIL')
-ADMIN_PASSWORD = env('ADMIN_PASSWORD')
 
 CELERY_RESULT_BACKEND = 'django-db'
 CELERY_CACHE_BACKEND = 'django-cache'

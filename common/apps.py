@@ -26,7 +26,8 @@ class CommonConfig(AppConfig):
 
             if not is_test_run:
                 # only configure signals if we are NOT in a test run
-                from . import signals  # noqa
+                # from . import signals  # noqa
+                pass
 
             if not settings.SEGMENT_WRITE_KEY:
                 raise ImproperlyConfigured('Segment write key not configured!')
