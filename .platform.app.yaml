@@ -1,0 +1,86 @@
+##########################
+# Container configuration.
+
+name: 'PROJECT_NAME_HERE!!'
+
+# The runtime the application uses.
+type: 'python:3.10'
+
+##########################
+# Builds and variables
+
+dependencies:
+    python3:
+        pipenv: '2022.9.4'
+
+hooks:
+    build: |
+        set -eu
+
+        # Download the latest version of pip
+        python3.10 -m pip install --upgrade pip
+
+        # Install dependencies
+        pipenv install --deploy
+
+        # Collect static assets
+        pipenv run python manage.py collectstatic --noinput
+
+    deploy: pipenv run python manage.py migrate
+
+##########################
+# Web configuration
+
+web:
+    upstream:
+        socket_family: unix
+        protocol: http
+    commands:
+        start: "pipenv run gunicorn -w 4 -b unix:$SOCKET config.wsgi:application"
+    locations:
+        "/":
+            passthru: true
+        "/static":
+            root: "static"
+            expires: 1h
+            allow: true
+
+##########################
+# Services
+
+# The relationships of the application with services or other applications
+#
+# The left-hand side is the name of the relationship as it will be exposed
+# to the application in the PLATFORM_RELATIONSHIPS variable. The right-hand
+# side is in the form `<service name>:<endpoint name>`.
+relationships:
+    database: "db:postgresql"
+    #queue_sms: "my_general_queue:rabbitmq"
+
+
+# Data and mounts
+
+# The size of the persistent disk of the application (in MB).
+disk: 512
+
+
+##########################
+# Workers
+
+# workers:
+#   queue:
+#     commands:
+#       start: |
+#           pipenv run queue_worker
+
+
+##########################
+# Cron jobs
+
+# crons:
+#     # example cron job run every 45 minutes
+#     some_cron_job:
+#         spec: '*/45 * * * *'
+#         commands: 
+#             start: |
+#                 pipenv run python manage.py my_admin_command
