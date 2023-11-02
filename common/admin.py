@@ -23,7 +23,6 @@ class UserAdmin(BaseUserAdmin, admin.ModelAdmin):
                 "email",
                 "first_name",
                 "last_name",
-                "phone_number",
             )
             }),
         (
@@ -33,7 +32,6 @@ class UserAdmin(BaseUserAdmin, admin.ModelAdmin):
                     "is_active",
                     "is_staff",
                     "is_superuser",
-                    "type"
                 ),
             },
         ),
