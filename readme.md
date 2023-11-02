@@ -1,3 +1,6 @@
+This is a personal boilerplate for Django 4.2 projects hosted on Platform.sh with celery queues and workers, basic smtp, Segment for analytics, CI using Github actions (linting and unit tests), a custom Django User model.
+
+
 ## Set up and run App Instance
 Clone repo. Run the following commands to configure the project:
 ```
