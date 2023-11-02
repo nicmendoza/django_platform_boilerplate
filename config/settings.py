@@ -30,7 +30,6 @@ env = environ.Env(
     PLATFORM_SMTP_HOST=(str, 'localhost'),
     SEGMENT_WRITE_KEY=(str, config.variable("SEGMENT_WRITE_KEY", None)),
     LOG_SEGMENT_EVENTS=(str, None),
-    
 )
 
 environ.Env().read_env()
